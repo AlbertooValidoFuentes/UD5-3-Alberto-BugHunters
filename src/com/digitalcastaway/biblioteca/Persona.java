@@ -2,7 +2,7 @@ package com.digitalcastaway.biblioteca;
 
 import java.util.ArrayList;
 
-public class Persona implements Usuario {
+public class Persona extends Usuario {
     private String nombre;
     private ArrayList<String> librosPrestados;
 
@@ -13,15 +13,13 @@ public class Persona implements Usuario {
 
     @Override
     public void obtenerLibro(int posicion, Biblioteca biblioteca) {
-        String titulo = biblioteca.prestarLibro(posicion);
-        librosPrestados.add(titulo);
+        librosPrestados.add(biblioteca.prestarLibro(posicion));
     }
 
     @Override
-    public String obtenerLibroAleatorio() {
-        String titulo = biblioteca.prestarLibroAleatorio();
-        librosPrestados.add(titulo);
-        return titulo;
+    public String obtenerLibroAleatorio(Biblioteca biblioteca) {
+        librosPrestados.add(biblioteca.prestarLibroAleatorio());
+        return biblioteca.prestarLibroAleatorio();
     }
 
     @Override
@@ -39,14 +37,15 @@ public class Persona implements Usuario {
 
     @Override
     public String toString() {
-        String output =  "Nombre='" + nombre + '\'' +
-                " tiene los siguientes libros de la biblioteca: \n";
+        StringBuilder output = new StringBuilder("Nombre='" + nombre + '\'' +
+                " tiene los siguientes libros de la biblioteca: \n");
 
         int contador = 0;
         for ( String titulo: librosPrestados) {
-            output += contador + " --> " + titulo + "\n";
+            output.append(contador).append(" --> ").append(titulo).append("\n");
             contador ++;
-        }
 
+        }
+        return output.toString();
     }
 }

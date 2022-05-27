@@ -29,6 +29,8 @@ public class Main {
 
             String opcion = sc.nextLine();
 
+
+
             switch(opcion) {
                 case "1":
                     biblio.showCatalog();
